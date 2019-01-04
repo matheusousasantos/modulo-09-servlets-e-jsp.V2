@@ -1,0 +1,42 @@
+! Cada recurso novo que formos aprendendo vamos colocar em uma página diferente pra ser melhor o aprendizado. !
+
+1 - Capturando exceções com JQuery
+	Java vai lançar uma exceção e será capturado com JQuery. Para isso acontecer voce precisa fazer a requisição 
+	para o servidor através do JQuery usando o Ajax
+	
+2 - Configurando o JQuery:
+	precisamos do link do jquery
+	
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script> - que será invocado no
+	no head
+	
+3 - Funcionamento do JQuery
+	Você precisa declarar o " $ " e na aspas o objeto que você deseja pegar. Vai ficar assim:
+	
+	<h3>Capturando Exceções com JQuery</h3>
+	<input type="text" value="Matheus Sousa Santos" id="nome">
+	<input type="button" onclick="testeJQuery();" value="testar">
+	
+	<script type="text/javascript">
+		function testeJQuery(){
+			alert($('#nome').val());
+		}
+	
+	</script>
+	
+4 - Agora precisamos de uma servlet que vai interceptar os dados que srão enviados pro servidor tentar processar e dar
+ 	uma exceção
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
