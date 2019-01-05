@@ -19,11 +19,16 @@
 			var valorInformado = $('#nome').val();
 
 			$.ajax({
-				method: "POST",
-				url: "capturarExcecao",
-				data: { valorParam: valorInformado }
-			}).always(function(response) {
-				alert(response);
+				method : "POST",
+				url : "capturarExcecao",
+				data : {valorParam : valorInformado}
+			
+			})
+			.done(function(response) {//Resposta OK
+				alert("Sucesso: " + response);
+			})
+			.fail(function(xhr, status, errorThrown) {
+				alert("Erro!" + xhr.responseText);
 			});
 
 		}

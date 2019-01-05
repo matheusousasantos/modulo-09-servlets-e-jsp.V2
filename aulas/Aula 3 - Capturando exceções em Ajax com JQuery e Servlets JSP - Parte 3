@@ -1,0 +1,15 @@
+1 - Precisamos mostrar a mensagem de erro corretamento
+			$.ajax({
+				method : "POST",
+				url : "capturarExcecao",
+				data : {valorParam : valorInformado}
+			
+			})
+			.done(function() {//Resposta OK
+				alert("Sucesso: +  response" );
+			})
+			.fail(function(xhr, status, errorThrown) {
+				alert("Erro!" + xhr.responseText);
+			});
+			
+   Onde o response será substituído pelo responseText

@@ -25,17 +25,15 @@ public class CapturarExcecao extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		
-		System.out.println(request.getParameter("valorParam"));
-		Integer.parseInt("valorParam");
-		
+			
 		try {
+			String valor = request.getParameter("valorParam");
+			Integer.parseInt(valor);
 			
 			response.setStatus(200);
 			response.getWriter().write("Processado com sucesso!");
 		
 		}catch(Exception e){
-			
 			response.setStatus(500);
 			response.getWriter().write("Error ao processar! " + e.getMessage());
 		
