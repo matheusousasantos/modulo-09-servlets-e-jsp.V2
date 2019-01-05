@@ -1,0 +1,68 @@
+1 - Vamos fazer um requisição pro lado do servidor(post) com JQuery usando o Ajax
+	pra recebermos a resposta de erro ou de sucesso precisamos enviar e ter essa
+	resposta via ajax usando o JQuery
+	
+2 - Pra usarmos o ajax precisamos do ajax do jquery
+
+			$.ajax({                          - JQuery > Ajax
+			
+				method : "POST",              - Dentro do ajax temos alguns parâmetros:
+				url : "capturarExcecao",
+				data : { valorParam : valorInformado }
+			}).always(function(response) {
+				alert(response);
+			});
+			
+	Ajax - Será construído entre chaves e através de arrays onde temos nossas variáveis e nossos valores 
+			
+	method - Um formulário em html pode ser em viado como: GET, POST, PUT, DELETE vários métodos do http 
+			 No nosso caso queremos enviar algo e fazer uma verificação.
+	
+	always - vai capitar o erro
+	
+	function(response) - método que sempre capta o retorno, a resposta no ajax é dado na variável response
+	
+	url - geralmente aponta pra uma servlet
+	
+	data - valores que serão enviados { valorParam : valorInformado } onde, do lado da servlet, será captado
+	o valorParam. O será atribuído o valorInformado no valorParam.
+	
+3 - Agora precisamos de uma servlet pra intercepitar os dados:
+
+4 - Os parâmetros serão sempre pegos pelo request(requisição) do pedido
+
+5 - Precisamos agora capturar um exceção, em java usamos o try, catch então vamos fazer uma resposta para o nosso navegador:
+	try {
+	
+		reponse.setStatus(200); - OK nenhum erro.
+	
+	}catch(Excepiton e){
+		
+		reponse.setStatus(500); - Erro interno do servidor
+	
+	}
+	
+	Vamos ter um retorno 200 onde não haverá nenhum erro ou 500. Onde será mostrado na tela uma resposta:
+	response.getWriter().write("Processado com sucesso!"); e podemos mostrar também o erro da exceção
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
