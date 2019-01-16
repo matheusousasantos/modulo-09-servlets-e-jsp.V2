@@ -1,7 +1,7 @@
-Open Session IN view (Filter de altentificações) - Definido um padrão que libera sessoes ou entrada do sistemas a partir
+Open Session IN view (Filter de autentificações) - Definido um padrão que libera sessoes ou entrada do sistemas a partir
 de um filtro no sistema
 
 Nenhum usuário poderá acessar direto as páginas sem está logado
 ex: O usuario não poderá acessar as páginas através da url, será barrado.
 
-Serve com altentificação em relação a sessoes do usuário.
+Serve com autentificação em relação a sessoes do usuário.

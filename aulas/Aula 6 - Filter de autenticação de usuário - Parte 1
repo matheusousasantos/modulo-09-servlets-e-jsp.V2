@@ -1,0 +1,19 @@
+Autentificando com filter:
+Vamos usar o filter do servlet usando uma API javax.servlet-api-3.0.1.jar onde você precisa adicionar ela na aplicação:
+javax.servlet-api-3.0.1 -> build path -> Add...
+
+precisamos transforma-la em um filter implementando a classe Filter
+
+1 É gerado um novo método, doFilter, que irá interceptar todas as requisições
+
+2 Voce pode definir que o método intercepite várias URLs ou somente uma lista de URLs
+
+3 Vamos anotar com @WebFilter() o Filter pra não precisar dizer pro xml, não precisamos declarar
+  esse arquivo no web.xml 
+  
+4 Aqui no caso ele irá interceptar todas as páginas @WebFilter(urlPatterns={"/*"})
+
+5 No método doFilter sempre precisamos fazer a chamado do própio método:
+  chain.doFilter(request, response);
+  
+  chain - responsável pela execução do request e do response.
