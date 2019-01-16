@@ -1,0 +1,28 @@
+Autentificando com filter:
+
+Temos que verificar se ao tentar acessar uma determinada página, o usuário está logado
+
+1 Verificar se o usuário está logado
+
+	HttpServletRequest req = (HttpServletRequest) request;
+    HttpSession session = req.getSession();
+	UsuarioLogado usuario = (UsuarioLogado) session.getAttribute("usuario");
+	
+2 Caso o usuário for nulo(Não esteja logado) o objeto será nulo
+	
+	UsuarioLogado usuarioLogado = (UsuarioLogado) session.getAttribute("usuario");
+		
+		if(usuarioLogado == null) {
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher(""); - redirecionamenro em jsp
+			dispatcher.forward(request, response);
+			return; - Para o processo parar de redirecionar.
+			
+		}
+		
+		Será preciso o return porque se o usuario não for nulo o processo vai ter que continuar liberando o
+		acesso a página.
+		
+3 Se eu entar acessa deretamente pela url vai caí na página autentificar.jsp
+		
+	
