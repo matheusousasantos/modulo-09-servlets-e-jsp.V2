@@ -1,0 +1,15 @@
+c:out do JSTL
+
+Eu posso muito bem mostrar o elemento sem usar o c:out::
+
+<td><c:out value="${user.id}"></c:out></td>
+
+somente com:
+
+${user.id}"
+
+Mais qual a diferença no uso ou não?
+NO c:out quando você manipula os dados referentes aquele elemento(deletar, atualizar) existem parâmentros que podem ser usados. Ex:
+scapeXml = "false";
+
+<td><c:out value="${user.id}" scapeXml = "false"></c:out></td> - Se vier algum tipo de xml no campo será ignorado
