@@ -1,0 +1,15 @@
+
+1 - Obs: Agente não precisa fazer um filter pra cada página.
+
+2 - Agora vamos fazer um filter genérico, somente um funcionando pra tudo.
+	A patir do momento que estiver-mos esse filter funcionando pra todos devemos trabalhar com padrões
+	para que as coisas funcione.
+	
+	Então quais páginas você não precisam está logadas pra acessar?
+	
+	autenticar.jsp e nem o index. O filter passa a intercepar todas as páginas que estão dentro da pasta pages.
+	@WebFilter(urlPatterns= {"/pages/*"})
+	
+	pra saber-mos qual página será acessada:
+	System.out.println(req.getServletPath()); - pega o caminha que está tentando ser acessado.
+	

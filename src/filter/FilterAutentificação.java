@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import user.UsuarioLogado;
 
-@WebFilter(urlPatterns= {"/pages/acessoAoSistema.jsp"})
+@WebFilter(urlPatterns= {"/pages/*"})
 public class FilterAutentificação implements Filter {
 
 	@Override
@@ -23,11 +23,19 @@ public class FilterAutentificação implements Filter {
 		
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
+		
+		String urlParaAutenticar = req.getServletPath(); //url do própio sistema
+		
+		
 		UsuarioLogado usuarioLogado = (UsuarioLogado) session.getAttribute("usuario");//Recuperando
 		
-		if(usuarioLogado == null) {
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/autenticar.jsp");
+//                      A url precisa ser diferênte da gerada quando o login e senha não são iguais aos previamente definidos
+//                      Essa url("/pages/ServletAutenticacao") é a gerada no http quando caimos na página autentificar.jsp
+		if(usuarioLogado == null && !urlParaAutenticar.equalsIgnoreCase("/pages/ServletAutenticacao")) {
+//			                                                                                     Depois que for autenticado vai ser direcionado
+//			                                                                                     pra essa URL, por isso ela precisa ser passada
+//			                                                                                     como parâmentro(get)
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/autenticar.jsp?url=" + urlParaAutenticar);
 			dispatcher.forward(request, response);
 			return;
 		}

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import user.UsuarioLogado;
 
 
-@WebServlet("/pages/servlet-autenticacao")
+@WebServlet("/pages/ServletAutenticacao")
 public class ServletAutenticacao extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,6 +35,7 @@ public class ServletAutenticacao extends HttpServlet {
 		
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
+		String url = request.getParameter("url");//URL do própio sistema
 		
 //      Neste momento pode ser feito a validação no banco de dados.
 		if(login.equalsIgnoreCase("admin") && senha.equalsIgnoreCase("123")) {
@@ -49,7 +50,7 @@ public class ServletAutenticacao extends HttpServlet {
 			
 			
 //			redireciona para o sistema e autoriza
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/acessoAoSistema.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher(url);//redireciona pro própio sistema.
 			dispatcher.forward(request, response);
 			
 			
