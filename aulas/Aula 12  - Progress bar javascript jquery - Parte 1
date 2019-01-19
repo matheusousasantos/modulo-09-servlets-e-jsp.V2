@@ -1,0 +1,18 @@
+Desenvolvendo o progress bar:
+
+1 - Vamos primento fazer o css da nossa barra de progresso.
+	Vamos ter 2 Ids, que serão a barra de progresso em si o caminho de irá percorrer:
+	
+	#myProgress {<!-- fundo da barra de progresso -->
+		width: 100%;
+		background-color: #ddd;
+	}
+	
+	#myBar {
+		width: 1%;
+		height: 30px;
+		background-color: #4CAF50;
+	}
+	
+2 - Vou criar um botão onde irá disparar a barra de progresso:
+	<button onclick="exibirBarra();"> Iniciar a barra de progresso</button>

@@ -27,6 +27,11 @@
 			<td><a href="pages/paginaPai.jsp">Load JQuery</a></td>
 		</tr>
 		
+		<tr>
+			<td><a href="pages/progressBar.jsp">Progress Bar</a></td>
+		</tr>
+		
+		
 	</table>
 	
 </body>
