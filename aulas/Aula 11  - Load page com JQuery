@@ -1,0 +1,19 @@
+Load - carregamento de páginas
+
+1 - ou criar mais um página onde terá um link no index que irá apontar pra ela.
+
+2 - essá página será a página pai vou criar tambem uma página chamada filha.
+
+3 - quando eu clicar em um botão vou chamar a página filha pra dentro da página pai.
+
+4 - precisamos ter um campo disponivel pra gente carregar que será uma div
+	
+	<div id="mostrarPaginaFilha">
+	
+	</div><!-- local de carregamento da página filha -->
+	
+5 - Trabalhando com JQuery:
+	dentro do script colocaremos o jquery,
+	eu quero que dentro do meu div(mostrarPaginaFilha) leia a página filha:
+	
+	$("#mostarPaginaFilha").load('paginaFilha.jsp'); - load página em JQuery
