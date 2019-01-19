@@ -8,5 +8,24 @@
 </head>
 <body>
 		<h1>Autenticar Usuário</h1>
+		<form method="POST" action="servlet-autenticacao">
+			<table>
+				<tr>
+					<td>Login:</td>
+					<td><input type="text" id="login" name="login"></td>
+				</tr>
+				
+				<tr>
+					<td>Senha:</td>
+					<td><input type="password" id="senha" name="senha"></td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td><input type="submit" id="logar" value="Logar"></td>
+				</tr>
+				
+			</table>
+		</form>
 </body>
 </html>

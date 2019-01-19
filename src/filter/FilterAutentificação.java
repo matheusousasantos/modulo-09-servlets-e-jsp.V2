@@ -23,7 +23,7 @@ public class FilterAutentificação implements Filter {
 		
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
-		UsuarioLogado usuarioLogado = (UsuarioLogado) session.getAttribute("usuario");
+		UsuarioLogado usuarioLogado = (UsuarioLogado) session.getAttribute("usuario");//Recuperando
 		
 		if(usuarioLogado == null) {
 			

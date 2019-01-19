@@ -1,0 +1,5 @@
+Autentificando com filter:
+
+Quando for enviado novamente pro acessoAoSistema vai ser passado pelo filter então será preciso definir um usuario.
+
+No filter atentificação ele ta recuperando já na servlet ele ta criando
