@@ -1,0 +1,16 @@
+Deslogando do sistema:
+
+1 - ai existir um link direto pro servlet pro método Get
+2 - agora vamos fazer deslogar:
+	
+	no Servlet:
+	if(Boolean.parseBoolean(request.getParameter("deslogar"))) { - se retornar true...
+	
+		HttpServletRequest req = (HttpServletRequest) request;
+			HttpSession session = req.getSession();
+			session.invalidate();
+			response.sendRedirect("../index.jsp"); - daí eu redireciono pro index.
+			
+	}
+	
+	Vou pegar a sessão e invalidar. Porque o usuário está na sessão se ele remover vai remover esse único usuário.
