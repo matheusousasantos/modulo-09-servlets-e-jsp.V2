@@ -1,0 +1,11 @@
+Aula 15
+
+1 - Usando a servlet FileUplaod:
+	o atributo no método doPost fileUpload guardará a imagem.
+	a url "fileUpload" apontará para servlet = "\fileUpload" 
+	
+2 - No servlet será adicionada no fileUpload uma imagem em base 64bits onde poderemos
+	pegar a ariável fileUpload e salvar no banco de dados.
+	Neste momento pode ser feito um insert no banco de dados.
+	
+3- Agora precisamos definir a reposta:
