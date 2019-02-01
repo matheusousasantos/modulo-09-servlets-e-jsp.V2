@@ -1,0 +1,24 @@
+Desenvolvendo o progress bar:
+
+Agora vamos fazr com JQuery:
+
+1 - primeiro vamos sobrescrever uma classe de css que já existe no jquery:
+
+ui- ferramenta de interação e construída por cima do núcleo da Jquery que permite que você possa animar diferentes elementos
+html "O tema"
+
+2 - Funções sem nome são execultadas diretamente sem precisar chamar
+
+3 - Vou criar duas váriáveis e adicionar id e a classe:
+
+	var progressbar = $("#progressbar"), progresslabel = $(".progress-label");
+	
+4 - Vou pegar a div(1º progressbar) e criar um progressbar do Jquery:
+	
+	progressbar.progressbar({ 
+	
+5 - Change - Enquando haver mudandança na barra de progresso ele vai continuar encrementado valores crescendo a barra
+
+	change : function() {
+		progresslabel.text(progressbar.progressbar('value') + "%");
+	},

@@ -16,3 +16,12 @@ Desenvolvendo o progress bar:
 	
 2 - Vou criar um botão onde irá disparar a barra de progresso:
 	<button onclick="exibirBarra();"> Iniciar a barra de progresso</button>
+	
+3 - Entendendo o setInterval(frame, 10);
+
+	Ele chama a função frame a cada 10 milissegundos
+  	Esse método irá chamar a função até a função clearInterval() for chamada ou a janela seja fechada
+  	O valor de ID retornado por setInterval é usado como o parametro para o método clearInterval()
+  	
+4 - Para executar uma fução apenas uma vez após um numero especificado de milissegundos, use o método setTimeout()
+

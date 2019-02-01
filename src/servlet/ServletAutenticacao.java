@@ -62,7 +62,7 @@ public class ServletAutenticacao extends HttpServlet {
 			dispatcher.forward(request, response);
 			
 			
-		} else {//Se o login falhou
+		} else {//Se o login 	falhou
 //          Redireciona para admin novamente.
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/autenticar.jsp");
 			dispatcher.forward(request, response);
