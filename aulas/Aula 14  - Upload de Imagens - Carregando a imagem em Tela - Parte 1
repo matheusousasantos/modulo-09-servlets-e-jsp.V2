@@ -1,0 +1,44 @@
+Aula 14 - 
+NO index vamos criar um link para a página upload.jsp
+
+1 - Vamos declarar o Jquery, precisamos do Ajax e do JQuery pra fazermos o upload então vamos ter que colocar a declaração.
+
+2 - <input type="file"> - já aparece um botão pra pegar o arquivo.
+
+3- <img alt="Imagem" src="" id="target" width="200" height="200"> - onde a imagem vai aparecer
+
+4 - Agora precisamos crir uma finção JavaScript - quando haver uma mudança(adicionar uma foto, mudar) vamos invocar a função 
+onchange chamando a função uploadFile();
+
+5 - explicação do código no própio código.
+
+6 - Se o arquivo está correto podemos fazer o upload dentro do if:
+    Vamos usar o Ajax pra envocar uma função JQuery:
+    
+    $.ajax({  - Invoca o Ajax através do '$.ajax', onde os atributos ficam dentro de um array:
+    
+		method: "POST",  - atributo método;
+		
+		url : "fileUpload",  - url que será o servlet;
+		
+		data : {    - que será os dados.
+		
+	    fileUpload : target.src  - variável que será carregada vai estar dentro do target.src que é nossa-
+		                         imagem representada na página./ Vai ser enviado a imagem.
+		
+		}
+	  }
+	)
+			
+	.done(function(response) {  - Se der sucesso-
+		alert("Sucesso:" + response);  - emite o alerta de sucesso.
+	  } 
+	)
+			
+	.fail(function(xhr, status, errorThrown) { 
+		alert("Error:" + xhr.response.Text);  - emite o alerta de erro.
+	  } 
+    );
+    
+    Obs: fileUpload atributo que será recuperado pela servlet.
+	
