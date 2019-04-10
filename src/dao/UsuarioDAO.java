@@ -242,10 +242,20 @@ public boolean validarSenha(String senha) throws Exception {
 
 public void gravarImagem(String fileUpload) throws SQLException {
 	
-	String sql = "INSERT INTO usuario (imagem) VALUES(?);";
+//	Exemplo de arquivo em base 64:
+//	data:application/pdf;base64,DDFSDSDSDFGFDGDFGDFGDFGFGDFGFDG
+	
+	String tipoDados = fileUpload.split(",")[0].split(";")[0].split("/")[1];
+	
+//	split 1 - Vou pegar... = data:application/pdf;base64, a ',' define o que será a primeira parte '[0]' e a segunda '[1]'
+//	split 2 - Vou pegar... = data:application/pdf. a ';' define o que será a primeira parte '[0]' e a segunda '[1]'
+//	split 3 - Vou pegar... = pdf. o '/' define o que será... vou pegar o tipo.
+	
+	String sql = "INSERT INTO usuario (imagem, tipofile) VALUES(?,?);";
 	
 	PreparedStatement pmt = connection.prepareStatement(sql);
-	pmt.setString(1, fileUpload); //que será a nossa imagem
+	pmt.setString(1, fileUpload);
+	pmt.setString(2, tipoDados);
 	
 	pmt.execute();
 	
@@ -253,11 +263,11 @@ public void gravarImagem(String fileUpload) throws SQLException {
 	
 }
 
-public String buscarImagem(String idUser)  {
+public BeanCursoJsp buscarImagem(String idUser)  {
 	
 	try {
 	
-		String sql = "SELECT imagem FROM usuario WHERE id = " + idUser;
+		String sql = "SELECT imagem, tipofile FROM usuario WHERE id = " + idUser;
 		
 		PreparedStatement pmt;
 		
@@ -268,12 +278,11 @@ public String buscarImagem(String idUser)  {
 		
 		while(rs.next()) {
 			
-			String imagem;
-			imagem = rs.getString("imagem");
-			return imagem;
+			BeanCursoJsp u = new BeanCursoJsp();
+			u.setImagem(rs.getString("imagem"));
+			u.setTipofile(rs.getString("tipofile"));
 			
-//			OU
-//			return rs.getString("imagem");
+			return u;
 		}
 	
 	} catch (SQLException e) {

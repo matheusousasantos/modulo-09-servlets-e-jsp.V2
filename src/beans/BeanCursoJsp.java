@@ -14,6 +14,7 @@ public class BeanCursoJsp {
 	private String estado;
 	private String ibge;
 	private String imagem;
+	private String tipofile;
 	
 
 	public String getLogin() {
@@ -111,6 +112,14 @@ public class BeanCursoJsp {
 
 	public void setImagem(String imagem) {
 		this.imagem = imagem;
+	}
+
+	public String getTipofile() {
+		return tipofile;
+	}
+
+	public void setTipofile(String tipofile) {
+		this.tipofile = tipofile;
 	}
 	
 }

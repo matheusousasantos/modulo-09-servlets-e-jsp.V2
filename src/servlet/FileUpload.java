@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 
+import beans.BeanCursoJsp;
 import dao.UsuarioDAO;
 
 @WebServlet("/pages/fileUpload")
@@ -43,15 +44,15 @@ public class FileUpload extends HttpServlet {
 			} else if (acao.equalsIgnoreCase("download")) {
 
 				String idUser = request.getParameter("idUser");
-				String imagem = usuarioDAO.buscarImagem(idUser);
-
+				BeanCursoJsp imagem = usuarioDAO.buscarImagem(idUser);
+				
 				if (imagem != null) {
 					
 //					Pegando o cabeçalho da resposta:
 					
-					response.setHeader("Content-Disposition", "attachment;filename=imagem.png");
+					response.setHeader("Content-Disposition", "attachment;filename=arquivo." + imagem.getTipofile());
 
-					String imagemPura = imagem.split(",")[1];
+					String imagemPura = imagem.getImagem().split(",")[1];
 
 					byte[] imagemBytes = new Base64().decodeBase64(imagemPura);
 

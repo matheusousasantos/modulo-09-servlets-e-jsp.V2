@@ -1,0 +1,26 @@
+Vamos fazer upload e download de qualquer tipo de arquivo:
+
+1 - Precisamos gravar no banco de dados o objeto em si(imagem, pdf etc..) e seu tipo separado para ser recuperado depois
+	
+2 - Vamos criar mais uma coluna chamada 'tipofile'
+
+3 - no DAO
+
+	String tipoDados = fileUpload.split(",")[0].split(";")[0].split("/")[1] - pega somente o tipo.
+
+	String sql = "INSERT INTO usuario (imagem, tipofile) VALUES(?,?);";
+	
+	PreparedStatement pmt = connection.prepareStatement(sql);
+	pmt.setString(1, fileUpload);
+	pmt.setString(2, tipoDados);
+	
+	O objeto será salvo junto com o seu tipo..
+	
+4 - fazendo o download:
+	
+	BeanCursoJsp imagem = usuarioDAO.buscarImagem(idUser);	
+	if (imagem != null) {			
+    Pegando o cabeçalho da resposta:		
+	response.setHeader("Content-Disposition", "attachment;filename=arquivo." + imagem.getTipofile() + '"'); - agora vou passar o arquivo dinâmico.
+					
+					
