@@ -21,7 +21,7 @@
 	<br>
 	<br>
 	<br>
-	<a href="fileUpload">Carregar Imagens</a>
+	<a href="fileUpload?acao=carregar">Carregar Imagens</a>
 	
 	<table>
 	
@@ -34,7 +34,7 @@
 			<td><c:out value="${usuario.login}"/></td>
 		
 			<td>Img:</td>
-			<td><c:out value="${usuario.imagem}"/></td>		
+			<td><a target="_blank" href="fileUpload?acao=download&idUser=${usuario.id}">Download Imagem</a></td>		
 		</tr>
 		</c:forEach>
 	

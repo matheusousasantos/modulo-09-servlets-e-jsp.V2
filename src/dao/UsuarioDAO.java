@@ -252,6 +252,38 @@ public void gravarImagem(String fileUpload) throws SQLException {
 	System.out.println("Saiu no banco de dados...");
 	
 }
+
+public String buscarImagem(String idUser)  {
+	
+	try {
+	
+		String sql = "SELECT imagem FROM usuario WHERE id = " + idUser;
+		
+		PreparedStatement pmt;
+		
+			pmt = connection.prepareStatement(sql);
+		
+		
+		ResultSet rs = pmt.executeQuery();
+		
+		while(rs.next()) {
+			
+			String imagem;
+			imagem = rs.getString("imagem");
+			return imagem;
+			
+//			OU
+//			return rs.getString("imagem");
+		}
+	
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	}
+	
+	
+	return null;
+}
 	
 	
 

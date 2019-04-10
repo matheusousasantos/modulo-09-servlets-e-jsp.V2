@@ -1,0 +1,12 @@
+Agora vamos baixar as imagens da tela, no método get já existe um rotina que é mostrar as imagens na tela teremos, a partir do
+parâmentro, decidir qual será a ação.
+
+1 -Do carregar imagens sua ação vai ser carregar:
+	<a href="fileUpload?acao=carregar">Carregar Imagens</a>
+
+2 - O download vai ser quando carregarmos a imagem:
+
+3 - Não podemos mostrar na tela a imagem como está salva no banco de dados pois ela está com o tipo
+	precisamos então tirar o tipo da imagem e passar só o conteúdo:
+	
+	podemos usar o split - posição 0 -> tipo, posição 1 -> conteúdo.
