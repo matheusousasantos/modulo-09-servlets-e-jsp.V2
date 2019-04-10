@@ -1,15 +1,20 @@
 package servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.UsuarioDAO;
+
 @WebServlet("/pages/fileUpload")
 public class FileUpload extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
     public FileUpload() {
         super();
@@ -26,12 +31,17 @@ public class FileUpload extends HttpServlet {
 	try {
 		
 		String fileUpload = request.getParameter("fileUpload");
-		System.out.println(fileUpload); //Imagem em base64
 		
+		usuarioDAO.gravarImagem(fileUpload);
+	
 		response.getWriter().write("Upload realizado com sucesso!!");
 		
+		System.out.println("Caiu no Seervlet...");
+		
 	}catch(Exception ex) {
-		response.getWriter().write("Erro!");
+		
+		ex.printStackTrace();
+		response.getWriter().write("Erro!, ");
 	}
 		
 	}

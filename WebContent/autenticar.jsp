@@ -10,7 +10,8 @@
 		<h1>Autenticar Usuário</h1>
 		<form method="POST" action="ServletAutenticacao">
 		                                                          <!-- URL vindo da tela que será mandada pro servlet -->
-		<input readonly="readonly" id="url" name="url" value="<%= request.getParameter("url")%>">
+		<input readonly="readonly" id="url" name="url" value="<%= request.getParameter("url") %>"/>
+		
 			<table>
 				<tr>
 					<td>Login:</td>

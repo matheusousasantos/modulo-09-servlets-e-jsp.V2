@@ -1,0 +1,29 @@
+Obs: No nosso caso não vou gravar na url e nem em uma pasta no servidor, só faço isso se for sistema muito grande que 
+existem upload de imagem a todo momento, imagens opesadas. Nessa caso posso salvar no banco de dados
+
+1 - Precisamos criar no banco de dados um campo para por a imagem que pode ser um campo de texto.
+	
+	ALTER TABLE public.usuario ADD COLUMN imagem text;
+	
+   text - aceita um campo gigante de texto perfeito pra base 64.
+   
+   Base64 - Usado pra tranferir dados de um lado pro outro como: imagens, pdf, exel,etc...
+   
+2 - Agora vou usar o DAO do usuário:
+   - Na classe FileUpload vou precisar instanciar a classe do dao
+   - Vou criar um método pra gravar imagem do usuario( usuarioDAO.gravarImagem(); ) passando a imagem como parêmetro.
+   
+3 - Criando o método:
+		public void gravarImagem(String fileUpload) throws SQLException {
+		
+			String sql = "INSERT INTO usuario (imagem) VALUES(?);";
+			PreparedStatement pmt = connection.prepareStatement(sql);
+			pmt.setString(1,fileUpload);
+			pmt.execute();
+		}
+		
+	Será criado uma tabela somente com o valor da imagem.
+	
+4 - Foi preciso criar um novo Filter pra poder acessar o banco de dados, é preciso criar um novo filter
+	não importando se existem outros filter.
+		

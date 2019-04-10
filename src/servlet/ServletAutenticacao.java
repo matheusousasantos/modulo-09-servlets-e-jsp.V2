@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import user.UsuarioLogado;
 
-
 @WebServlet("/pages/ServletAutenticacao")
 public class ServletAutenticacao extends HttpServlet {
 	private static final long serialVersionUID = 1L;
