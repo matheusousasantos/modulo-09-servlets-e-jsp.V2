@@ -34,7 +34,7 @@
 			<td><c:out value="${usuario.login}"/></td>
 		
 			<td>Img:</td>
-			<td><a target="_blank" href="fileUpload?acao=download&idUser=${usuario.id}">Download Imagem</a></td>		
+			<td><a href="fileUpload?acao=download&idUser=${usuario.id}">Download Imagem</a></td>		
 		</tr>
 		</c:forEach>
 	

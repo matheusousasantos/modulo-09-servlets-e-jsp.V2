@@ -19,87 +19,82 @@ import dao.UsuarioDAO;
 @WebServlet("/pages/fileUpload")
 public class FileUpload extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-    public FileUpload() {
-        super();
+	public FileUpload() {
+		super();
 
-    }
+	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		try {
-			
-		String acao = request.getParameter("acao");
-		
-		if(acao.equalsIgnoreCase("carregar")){
-			
-			RequestDispatcher view = request.getRequestDispatcher("upload.jsp");
-			request.setAttribute("listaUserImagem", usuarioDAO.getUsuarios());
-			view.forward(request, response);
-			
-			
-		} else if(acao.equalsIgnoreCase("download")) {
-			
-			String idUser = request.getParameter("idUser");
-			String imagem = usuarioDAO.buscarImagem(idUser);
-			
-			if(imagem != null) {
-//				Pega somente a imagem pura
-				String imagemPura = imagem.split(",")[1]; // ele vai quebrar ( , ) e eu vou pegar na posição 1( [1] )
 
-//				Vamos converter base64 para byte:
-				byte [] imagemBytes = new Base64().decodeBase64(imagemPura);
-				
-//				Coloca os bytes em um objetos de 'entrada' pra processar
-				InputStream is = new ByteArrayInputStream(imagemBytes);
+			String acao = request.getParameter("acao");
 
-				
-//			    Escrever dados na resposta {
+			if (acao.equalsIgnoreCase("carregar")) {
+
+				RequestDispatcher view = request.getRequestDispatcher("upload.jsp");
+				request.setAttribute("listaUserImagem", usuarioDAO.getUsuarios());
+				view.forward(request, response);
+
+			} else if (acao.equalsIgnoreCase("download")) {
+
+				String idUser = request.getParameter("idUser");
+				String imagem = usuarioDAO.buscarImagem(idUser);
+
+				if (imagem != null) {
 					
-					int read = 0; //controle
+//					Pegando o cabeçalho da resposta:
+					
+					response.setHeader("Content-Disposition", "attachment;filename=imagem.png");
+
+					String imagemPura = imagem.split(",")[1];
+
+					byte[] imagemBytes = new Base64().decodeBase64(imagemPura);
+
+					InputStream is = new ByteArrayInputStream(imagemBytes);
+
+					int read = 0;
 					byte[] bytes = new byte[1024];
-					OutputStream os =  response.getOutputStream();
-					
-					while((read = is.read(bytes)) != -1) {
+					OutputStream os = response.getOutputStream();
+
+					while ((read = is.read(bytes)) != -1) {
 						os.write(bytes, 0, read);
 					}
-					
-					os.flush(); //Enviar
-					os.close(); //fechar
-				
-//				}
+
+					os.flush(); // Enviar
+					os.close(); // fechar
+
+					// }
+				}
+
 			}
-		
-		}
-		
-		
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	try {
-		
-		String fileUpload = request.getParameter("fileUpload");
-		
-		usuarioDAO.gravarImagem(fileUpload);
-	
-		response.getWriter().write("Upload realizado com sucesso!!");
-		
-	}catch(Exception ex) {
-		
-		ex.printStackTrace();
-		response.getWriter().write("Erro!, ");
-	}
-		
+		try {
+
+			String fileUpload = request.getParameter("fileUpload");
+
+			usuarioDAO.gravarImagem(fileUpload);
+
+			response.getWriter().write("Upload realizado com sucesso!!");
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+			response.getWriter().write("Erro!, ");
+		}
+
 	}
 
 }

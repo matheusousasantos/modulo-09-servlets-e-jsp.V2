@@ -1,0 +1,11 @@
+Baixando o arquivo direto:
+O nosso sistema estava mostrado a imagem em  outra aba, no nosso caso precisamos que ele baixe o arquivo..
+
+1 - Vamos precisar do cabeçalho da resposta
+	
+	response.setHeader("Content-Disposition", "attachment;filename=imagem.png");
+	
+	Content-Disposition - conteúdo em si.
+	attachment;filename=imagem.png - tipo que será baixado, não precisa ser o mesmo tipo que foi gravado. 
+	
+2 - Somente setando o cabeçalho será baixado a imagem
