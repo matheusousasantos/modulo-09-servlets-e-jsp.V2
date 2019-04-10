@@ -1,0 +1,31 @@
+Trabalhando co data table jquery
+
+1 - Vamos criar na pagina um link pra acessar o data table:
+
+2 - Vamos declarar o CSS
+	Copie o link apontado por> Include these two files ou importando direto:
+	<link href="http://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+
+3 - Vamos copiar uma tabela em html assim como as funções de JS:
+
+
+	HTML:
+	<table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>...
+	
+	JS:
+	$(document).ready(function() {
+    $('#example').DataTable();
+	} );	
+	
+4 - Outro detalhe> tem que ter o jQuery instalado.

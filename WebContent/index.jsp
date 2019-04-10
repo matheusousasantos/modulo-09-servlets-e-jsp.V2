@@ -35,8 +35,13 @@
 			<td><a href="pages/upload.jsp">Upload</a></td>
 		</tr>
 		
+		<tr>
+			<td><a href="pages/data-table.jsp">Data Table jQuery</a></td>
+		</tr>
+		
 		
 	</table>
 	
 </body>
+
 </html>
