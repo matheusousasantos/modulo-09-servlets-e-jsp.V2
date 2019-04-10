@@ -1,0 +1,24 @@
+Agora vamos mostrar a imagem em tela:
+
+1 - Vamos buscar do banco de dados uma imagem (ou lista) de imagem de um determinado usuario.
+
+2 - Vamos criar no bean usuario um atributo imagem.
+
+3 - Agora só precisamos mostrar na tela os dados do usuário inclusive a imagem.
+
+		<table>
+			<c:forEach var="usuario" items="${listaUserImagem}">
+			<tr>
+				<td>Id:</td>
+				<td><c:out value="${usuario.id}"/></td>
+				
+				<td>Login:</td>
+				<td><c:out value="${usuario.login}"/></td>
+			
+				<td>Img:</td>
+				<td><c:out value="${usuario.imagem}"/></td>		
+			</tr>
+			</c:forEach>
+		</table>
+		
+Vamos terminar na proxima aula...

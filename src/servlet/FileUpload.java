@@ -1,7 +1,9 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +25,19 @@ public class FileUpload extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		
+		try {
+		
+		RequestDispatcher view = request.getRequestDispatcher("upload.jsp");
+		
+		request.setAttribute("listaUserImagem", usuarioDAO.getUsuarios());
+			
+		view.forward(request, response);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 
 	}
 

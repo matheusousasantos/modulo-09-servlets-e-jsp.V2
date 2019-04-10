@@ -13,19 +13,8 @@ public class BeanCursoJsp {
 	private String cidade;
 	private String estado;
 	private String ibge;
-	private String fotoBase64;
-	private String fotoBase64Miniatura;
-	private String contentType;
-	private String curriculoBase64;
-	private String contentTypeCurriculo;
-	private boolean ativo;
-	private String sexo;
-	private String perfil;
+	private String imagem;
 	
-	private boolean atualizarImage = true;
-	private boolean atualizarPDF = true;
-	
-	private String tempFotoUser; /*atributo aux*/
 
 	public String getLogin() {
 		return login;
@@ -116,94 +105,12 @@ public class BeanCursoJsp {
 		this.ibge = ibge;
 	}
 
-	public String getFotoBase64() {
-		return fotoBase64;
+	public String getImagem() {
+		return imagem;
 	}
 
-	public void setFotoBase64(String fotoBase64) {
-		this.fotoBase64 = fotoBase64;
-	}
-	
-	public String getCurriculoBase64() {
-		return curriculoBase64;
-	}
-
-	public void setCurriculoBase64(String curriculoBase64) {
-		this.curriculoBase64 = curriculoBase64;
-	}
-
-	public String getContentType() {
-		return contentType;
-	}
-
-	public void setContentType(String contentType) {
-		this.contentType = contentType;
-	}
-
-	public String getContentTypeCurriculo() {
-		return contentTypeCurriculo;
-	}
-
-	public void setContentTypeCurriculo(String contentTypeCurriculo) {
-		this.contentTypeCurriculo = contentTypeCurriculo;
-	}
-	
-
-	public String getFotoBase64Miniatura() {
-		return fotoBase64Miniatura;
-	}
-
-	public void setFotoBase64Miniatura(String fotoBase64Miniatura) {
-		this.fotoBase64Miniatura = fotoBase64Miniatura;
-	}
-
-	public void setTempFotoUser(String tempFotoUser) {
-		this.tempFotoUser = tempFotoUser;
-	}
-
-	public String getTempFotoUser() {
-		tempFotoUser = "data:" + contentType + ";base64," + fotoBase64;
-		return tempFotoUser;
-	}
-
-	public boolean isAtualizarImage() {
-		return atualizarImage;
-	}
-
-	public boolean isAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
-	}
-
-	public void setAtualizarImage(boolean atualizarImage) {
-		this.atualizarImage = atualizarImage;
-	}
-
-	public boolean isAtualizarPDF() {
-		return atualizarPDF;
-	}
-
-	public void setAtualizarPDF(boolean atualizarPDF) {
-		this.atualizarPDF = atualizarPDF;
-	}
-
-	public String getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
-	}
-
-	public String getPerfil() {
-		return perfil;
-	}
-
-	public void setPerfil(String perfil) {
-		this.perfil = perfil;
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
 	
 }

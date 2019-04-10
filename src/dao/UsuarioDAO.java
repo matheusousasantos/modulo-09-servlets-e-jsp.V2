@@ -37,14 +37,7 @@ public class UsuarioDAO {
 			insert.setString(8, usuario.getCidade());
 			insert.setString(9, usuario.getEstado());
 			insert.setString(10,usuario.getIbge());
-			insert.setString(11, usuario.getFotoBase64());
-			insert.setString(12,usuario.getContentType());
-			insert.setString(13, usuario.getCurriculoBase64());
-			insert.setString(14, usuario.getContentTypeCurriculo());
-			insert.setString(15, usuario.getFotoBase64Miniatura());
-			insert.setBoolean(16, usuario.isAtivo());
-			insert.setString(17, usuario.getSexo());
-			insert.setString(18,  usuario.getPerfil());
+		
 			
 			insert.execute();
 			connection.commit();
@@ -81,11 +74,14 @@ public class UsuarioDAO {
 	}
 	
 
-	private List<BeanCursoJsp> consultarUsuarios(String sql) throws SQLException {
+	public List<BeanCursoJsp> getUsuarios() throws SQLException {
 		
 		List<BeanCursoJsp> lista = new ArrayList<>();
-		PreparedStatement list = connection.prepareStatement(sql);
-		ResultSet rs = list.executeQuery();
+		
+		String sql = "SELECT * FROM usuario";
+		PreparedStatement pmt = connection.prepareStatement(sql);
+		
+		ResultSet rs = pmt.executeQuery();
 		
 		while(rs.next()) {
 			
@@ -101,14 +97,8 @@ public class UsuarioDAO {
 			obj.setCidade(rs.getString("cidade"));
 			obj.setEstado(rs.getString("estado"));
 			obj.setIbge(rs.getString("ibge"));
-			//obj.setFotoBase64(rs.getString("fotobase64"));
-			obj.setFotoBase64Miniatura(rs.getString("fotobase64miniatura"));
-			obj.setContentType(rs.getString("contenttype"));
-			obj.setCurriculoBase64(rs.getString("curriculobase64"));
-			obj.setContentTypeCurriculo(rs.getString("contenttypecurriculo"));
-			obj.setAtivo(rs.getBoolean("ativo"));
-			obj.setSexo(rs.getString("sexo"));
-			obj.setPerfil(rs.getString("perfil"));
+			obj.setImagem(rs.getString("imagem"));
+			
 			
 			lista.add(obj);
 		}
@@ -117,18 +107,7 @@ public class UsuarioDAO {
 		
 	}
 	
-	public List<BeanCursoJsp> listar() throws SQLException  {
-
-		String sql = "SELECT * FROM usuario WHERE login <> 'admin'";
-		return consultarUsuarios(sql);
-			
-	}
 	
-	public List<BeanCursoJsp> listar(String descricaoconsulta) throws SQLException  {
-		String sql = "SELECT * FROM usuario WHERE login <> 'admin' AND nome LIKE '%"+descricaoconsulta+"%'";
-		return consultarUsuarios(sql);
-	}
-
 	public BeanCursoJsp consultar(String id) {
 		
 		String sql = "SELECT * FROM usuario WHERE id = '"+id+"'AND login <> 'admin'";
@@ -150,14 +129,7 @@ public class UsuarioDAO {
 				obj.setCidade(rs.getString("cidade"));
 				obj.setEstado(rs.getString("estado"));
 				obj.setIbge(rs.getString("ibge"));
-				obj.setFotoBase64(rs.getString("fotobase64"));
-				obj.setFotoBase64Miniatura(rs.getString("fotobase64miniatura"));
-				obj.setContentType(rs.getString("contenttype"));
-				obj.setCurriculoBase64(rs.getString("curriculobase64"));
-				obj.setContentTypeCurriculo(rs.getString("contenttypecurriculo"));
-				obj.setAtivo(rs.getBoolean("ativo"));
-				obj.setSexo(rs.getString("sexo"));
-				obj.setPerfil(rs.getString("perfil"));
+			
 				
 				return obj;
 			}
@@ -177,20 +149,6 @@ public class UsuarioDAO {
 		sql.append(" UPDATE usuario SET login = ?, senha = ?, nome = ?, "); // Essa parte será em comum entre todos eles.
 		sql.append(" telefone = ?, cep = ?, rua = ?, bairro = ?, cidade = ?, ");
 		sql.append(" estado = ?, ibge = ?, ativo = ?, sexo = ?, perfil = ?");
-
-		if (usuario.isAtualizarImage()) {
-			sql.append(", fotobase64 = ?, contenttype = ?");
-		}
-
-		if (usuario.isAtualizarPDF()) {
-			sql.append(", curriculobase64 = ?, contenttypecurriculo = ? ");
-		}
-
-		if (usuario.isAtualizarImage()) {
-			sql.append(", fotobase64miniatura = ? ");
-		}
-
-		sql.append(" WHERE id =" + usuario.getId());
 		
 		try {
 			
@@ -205,37 +163,7 @@ public class UsuarioDAO {
 			pmt.setString(8, usuario.getCidade());
 			pmt.setString(9, usuario.getEstado());
 			pmt.setString(10,usuario.getIbge());
-			pmt.setBoolean(11,usuario.isAtivo());
-			pmt.setString(12, usuario.getSexo());
-			pmt.setString(13, usuario.getPerfil());
-			
-			if(usuario.isAtualizarImage()) {
-				pmt.setString(14, usuario.getFotoBase64());
-				pmt.setString(15, usuario.getContentType());
-			}
-			
-			if(usuario.isAtualizarPDF()) {
-				
-				if(!usuario.isAtualizarImage()) {
-					
-					System.out.println("Entrou na condição se o PDF for verdadeiro");
-					pmt.setString(14, usuario.getCurriculoBase64());
-					pmt.setString(15, usuario.getContentTypeCurriculo());
-					
-				} else {
-					System.out.println("entrou mesmo sendo falso.");
-					pmt.setString(16, usuario.getCurriculoBase64());
-					pmt.setString(17, usuario.getContentTypeCurriculo());
-				}
-				
-			} else if(usuario.isAtualizarImage()) {
-				pmt.setString(16, usuario.getFotoBase64Miniatura());
-			}
-			
-			if(usuario.isAtualizarImage() && usuario.isAtualizarPDF()) {
-				pmt.setString(18, usuario.getFotoBase64Miniatura());
-			}
-			
+		
 			connection.commit();
 			
 			pmt.executeUpdate();
