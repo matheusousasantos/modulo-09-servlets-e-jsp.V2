@@ -1,6 +1,7 @@
 package filter;
 
 import java.io.IOException;
+import java.sql.Connection;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -18,26 +19,22 @@ import user.UsuarioLogado;
 
 @WebFilter(urlPatterns= {"/pages/*"})
 public class FilterAutentificação implements Filter {
+	
+	private static Connection connection;
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		
-		
-		
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
 		
-		String urlParaAutenticar = req.getServletPath();//url do própio sistema
+		String urlParaAutenticar = req.getServletPath();
 		
-		UsuarioLogado usuarioLogado = (UsuarioLogado) session.getAttribute("usuario");//Recuperando
-		
-//                      A url precisa ser diferênte da gerada quando o login e senha não são iguais aos previamente definidos
-//                      Essa url("/pages/ServletAutenticacao") é a gerada no http quando caimos na página autentificar.jsp
+		UsuarioLogado usuarioLogado = (UsuarioLogado) session.getAttribute("usuario");
+
 		if(usuarioLogado == null && !urlParaAutenticar.equalsIgnoreCase("/pages/ServletAutenticacao")) {
-//			                                                                                     Depois que for autenticado vai ser direcionado
-//			                                                                                     pra essa URL, por isso ela precisa ser passada
-//			                                                                                     como parâmentro(get)
+		                                                                                   
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/autenticar.jsp?url=" + urlParaAutenticar);
 			dispatcher.forward(request, response);
 			return;
@@ -47,6 +44,11 @@ public class FilterAutentificação implements Filter {
 		
 		System.out.println("Interceptando...");
 		
+	}
+	
+	@Override
+	public void init(FilterConfig agr0) throws ServletException{
+		connection = SingleConnection.getConnection();
 	}
 	
 }

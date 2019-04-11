@@ -1,0 +1,14 @@
+Já sabemos o formato do dados que temos que reponder
+
+Obs: quando for adicionar uma biblioteca não esqueça de adicionar no class path: botão direito -> build path -> adicionar class path
+
+Filter:
+Podemos ter o filter com a autenticação e a chamada ao banco de dados somente chamando todo aquele processo no método init.
+
+private static Connection connection;
+
+@Override
+	public void init(FilterConfig agr0) throws ServletException{
+		connection = SingleConnection.getConnection();
+	}
+	
