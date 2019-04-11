@@ -1,0 +1,168 @@
+Construindo data table em server side:
+
+server side - fazer nossa aplicação interagir com o banco de dados.
+
+1 - Local de pesquisa na documentação:
+	https://datatables.net/examples/server_side/
+
+2 - No primeiro exemplo: https://datatables.net/examples/server_side/, temos uma tabela que no seu JS existem alguns parametros que precisamos
+	passar para o nosso data table pra dizer pra ele que estamos utilizando o carregamendo de dados do servidor:
+	
+	JS:
+	$(document).ready(function() {
+	    $('#example').DataTable( {
+	        "processing": true, - Processamento
+	        "serverSide": true, - Server side
+	        "ajax": "scripts/server_processing.php" - Ajax, onde teremos as respostas dos dados vindo do banco de dados.
+	    } );
+	} );
+	
+	HTML:
+	<table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Start date</th>
+                <th>Salary</th>
+            </tr>
+        </tfoot>
+    </table>
+    
+    percebemos que o html só tem as colunas.
+    
+    CSS:
+    É o mesmo
+    
+    AJAX:
+    Tipo de retorno que será um JSON
+    
+    Server Side:
+    Da dacumentação é em PHP então vamos fazer em Java.
+    
+    
+3 - Observe que na documentação precisamos retornar um JSON
+	
+	$(document).ready(function() {                   - Esse método(function) fará o processamento na hora que abrir a tela.
+	    $('#minhatabela').DataTable( {               - Cria a tabela e todo o processamento do Ajax
+	        "processing": true,
+	        "serverSide": true,
+	        "ajax": "scripts/server_processing.php"  - retorno dos dados do servidor. URL de retorno JSON (resposta do servidor)
+	    } );
+	} );
+	
+	Como estamos trabalhando com java precisamos dar a URL da nossa servlet: "scripts/server_processing.php"
+	
+4 - Precisamos retornar em formato JSON de dados nessa estrutura:
+	
+	Ajax:
+		{
+		  "draw": 1,
+		  "recordsTotal": 57,
+		  "recordsFiltered": 57,
+		  "data": [
+		    [
+		      "Airi",
+		      "Satou",
+		      "Accountant",
+		      "Tokyo",
+		      "28th Nov 08",
+		      "$162,700"
+		    ],
+		    [
+		      "Angelica",
+		      "Ramos",
+		      "Chief Executive Officer (CEO)",
+		      "London",
+		      "9th Oct 09",
+		      "$1,200,000"
+    		],
+    	   ]
+    	  ]
+    	}
+        
+5 - Vamos criar a servlet:
+
+	Ela precisa interceptar a URL dat Data Table: carregarDadosDataTable e precisa ter o caminho do 'pages' pois o ajax vai desparar
+	uma ação de uma página dentro da pasta pages.  "/pages/carregarDadosDataTable"
+    
+    Obs: O ajax vai fazer um requisição de dados que será interceptado pelo GET
+    
+6 - Precisamos agora programar essa resposta para o JSON que estará dentro do método 'GET'
+	
+	response.setStatus(200);        - Status da esposta
+	response.getWriter().write(""); - JSON de resposta
+    
+7 -  Vamos ter uma string com uma base de responsta em JSON:
+
+		String json =	{
+			  "draw": 1,
+			  "recordsTotal": 57,
+			  "recordsFiltered": 57,
+			  "data": [
+			    [
+			      "Airi",
+			      "Satou",
+			      "Accountant",
+			      "Tokyo",
+			      "28th Nov 08",
+			      "$162,700"
+			    ],
+			    [
+			      "Angelica",
+			      "Ramos",
+			      "Chief Executive Officer (CEO)",
+			      "London",
+			      "9th Oct 09",
+			      "$1,200,000"
+			    ],
+			  ]
+			}
+	
+		Formatando o JSON:
+		
+		String json =	"{"+
+			  "\"draw\": 1," +
+			  "\"recordsTotal\": 57," +
+			  "\"recordsFiltered\": 57," +
+			  "\"data\": [" +
+			    "[" +
+			      "\"Airi\", " +
+			      "\"Satou\"," +
+			      "\"Accountant\"," +
+			      "\"Tokyo\"," +
+			      "\"28th Nov 08\"," +
+			      "\"$162.700\"" +
+			    "]," +
+			    "[" +
+			      "\"Angelica\", " +
+			      "\"Ramos\", " +
+			      "\"Chief Executive Officer (CEO)\", " +
+			      "\"London\", " +
+			      "\"9th Oct 09\", " +
+			      "\"$1.200.000\"" +
+			   "]," +
+			  "]" +
+			"}";
+		
+    Agora temos nosso JSON em forma de string dentro do java e nossa responsta será a variável json.
+    response.getWriter().write(json);
+    
+    Sabemos como podemos retornar os dados em JSON agora temos que retornar direto do banco retornando esses dados com formato JSOn
+	
+    
+    
+    
+    
