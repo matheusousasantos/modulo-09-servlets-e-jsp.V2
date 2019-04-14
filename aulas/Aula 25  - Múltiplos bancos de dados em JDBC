@@ -1,0 +1,41 @@
+Várias conexões com bancos diferentes usando JDBC
+
+Podemos fazer com padrão factory(fábriga de conecões) ou podemos criar uma classe com as conexões uma pra 
+postgres outra pra mysql outra pra vários bancos sendo postgres etc...
+
+Podemos criar a instancia tudo no filter.
+
+1 - Vamos usar o banco do módulo anterior o 'curso-jsp'
+
+2 - No módulo connection vamos criar outra classe que será o 'SingleConnection2'
+
+3 - Pra conseguirmos iniciar a conexão no filter vamos ter outra connection, vamos precisar de outra variável
+	também:
+		
+		private static Connection connection2;
+	
+	e quando iniciarmos vamos ter uma nova conexão:
+	
+		public void init(FilterConfig agr0) throws ServletException{
+			connection = SingleConnection.getConnection();
+			connection2 = SingleConnection2.getConnection();
+		}
+
+4 - Podemos criar outro DAO pra trabalhar com dois bancos de dados diferentes.
+
+5 - Trabalhando com outros bancos:
+	
+	No caso se quisermos trabalhar com outros tipos de banco de dados, precisamos inserir a lib correspondente do 
+	banco MySql
+	
+	public class SingleConnectionMySQL {
+																		
+	private static String url = "jdbc:mysql://localhost:3306/javaEstudo-m9?autoReconnect=true";
+	private static String password = "admin";
+	private static String user = "admin";
+	private static Connection connection = null; 
+	
+	}
+	
+
+	

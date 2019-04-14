@@ -15,12 +15,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import connection.SingleConnection;
+import connection.SingleConnection2;
 import user.UsuarioLogado;
 
 @WebFilter(urlPatterns= {"/pages/*"})
 public class FilterAutentificação implements Filter {
 	
 	private static Connection connection;
+	private static Connection connection2;
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -49,6 +51,7 @@ public class FilterAutentificação implements Filter {
 	@Override
 	public void init(FilterConfig agr0) throws ServletException{
 		connection = SingleConnection.getConnection();
+		connection2 = SingleConnection2.getConnection();
 	}
 	
 }
