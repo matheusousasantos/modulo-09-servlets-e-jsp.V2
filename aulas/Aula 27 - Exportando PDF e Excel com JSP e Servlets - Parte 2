@@ -1,0 +1,13 @@
+Vamos contruir uma servlet para interceptar os dados, 
+ela vai pegar a requisição, gerar o relatório e devolver um download
+
+1 - Vamos instanciar o nosso relatório:
+	private RelatorioService relatorioService = new RelatorioService();
+	
+2 - Vamos receber da página o tipo no parâmetro, que será PDF, EXEL, etc...
+
+3 - Agora precisamos carregar os dados:
+	List<BeanCursoJsp> usuarios = dao.getUsuarios();
+	
+4 - Agora vou pegar o caminho do meu relatório:
+    resto da explicação no código.
