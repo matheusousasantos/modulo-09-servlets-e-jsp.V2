@@ -1,0 +1,16 @@
+Criação de relatórios:
+
+Vamos usar o Ireport
+
+vamos criar um pacote para salvar os relatórios.
+
+1 - precisamos da biblioteca do jasper para gerar os relatórios:
+	
+2 - Vamos criar a classe pra fazer a geração do relatórios:
+
+3 - Vou criar uma classe java que vai promover algum seviço, no nosso caso vai imprimir um relatório.
+    service - 
+    
+4 - Explicação no próprio código...
+
+5 - O Ireport trabalha com vários parâmetros pré-definidos quem podem ser melhor estudado.
