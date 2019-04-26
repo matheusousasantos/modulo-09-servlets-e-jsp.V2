@@ -20,17 +20,11 @@ public class RelatorioService implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private static final String FOLDER_RELATORIOS = "/relatorios";
-	
 	private static final String  SUBREPORT_DIR = "SUBREPORT_DIR"; 
-
 	private String SEPARATOR = File.separator; 
-
-	private static final String caminhoArquivoRelatorio = null;
-	
+	private String caminhoArquivoRelatorio = null;
 	private JRExporter exporter =  null;
-	
 	private String caminhoSubReport_Dir = "";
-	
 	private File arquivoGerado = null;
 	
 	public String gerarRelatorio(List<?> listaDataBeanColletion, HashMap parametrosRelatorio, 
@@ -54,33 +48,26 @@ public class RelatorioService implements Serializable {
 		parametrosRelatorio.put("REPORT_PARAMETERS_IMG", caminhoRelatorio);
 		
 
-		String caminhoArquviosJasper = caminhoRelatorio + SEPARATOR + nomeRelatorioJasper + ".jasper";
+		String caminhoArquivosJasper = caminhoRelatorio + SEPARATOR + nomeRelatorioJasper + ".jasper";
 			
 
-		JasperReport relatorioJasper = (JasperReport) JRLoader.loadObjectFromFile(caminhoArquviosJasper);
+		JasperReport relatorioJasper = (JasperReport) JRLoader.loadObjectFromFile(caminhoArquivosJasper);
 			
 		caminhoSubReport_Dir = caminhoRelatorio + SEPARATOR;
-			
-
 		parametrosRelatorio.put(SUBREPORT_DIR, caminhoSubReport_Dir);
 			
 		JasperPrint impressoraJasper = JasperFillManager.fillReport(relatorioJasper, parametrosRelatorio, jrbcds);
 
 		exporter = new JRPdfExporter();
 			
-
-		caminhoRelatorio =  SEPARATOR + nomeRelatorioSaida + ".pdf";
-			
+		caminhoArquivoRelatorio =  SEPARATOR + nomeRelatorioSaida + ".pdf";
 
 		arquivoGerado = new File(caminhoArquivoRelatorio);
 			
-
 		exporter.setParameter(JRExporterParameter.JASPER_PRINT, impressoraJasper);
 			
-
 		exporter.setParameter(JRExporterParameter.OUTPUT_FILE, arquivoGerado);
 			
-
 		exporter.exportReport();
 
 		arquivoGerado.deleteOnExit();

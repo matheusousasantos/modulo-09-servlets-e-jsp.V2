@@ -53,5 +53,11 @@ public class FilterAutentificação implements Filter {
 		connection = SingleConnection.getConnection();
 		connection2 = SingleConnection2.getConnection();
 	}
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

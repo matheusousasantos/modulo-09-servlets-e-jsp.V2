@@ -1,0 +1,22 @@
+1 - Vamos precisar exportar o a classe Aluno como um jar
+
+2 - Agora vamos trabalhar com o Ireport - vamos inserir um arquivo jar e criar um relatório colocando o nome o mesmo
+	colocado em:
+	
+	String fileUrl = relatorioService.gerarRelatorio(dados, new HashMap(), "rel_usuario", "rel_usuario", context);
+	> rel_usuario
+	
+3 - Quando criar todo o processo de criação do relatório vou adicionar o arquivo no pacote 'relatorios'
+
+4 - Agora vamos precisar de um 'botão' para envocar nosso relatório.
+	Esse botão ficará no index onde irá enviar para a pagina relatorio.jsp que terá dois links: PDF e Exel
+	onde cada um apontará pra mesma servlet junto com um parâmetro que será seu ID(o que será feito)
+	
+5 - Nunca esqueça de mapear a servlet correto como a página de acesso está dentro da pasta pages precisa ser
+	colocada no caminho, ex:
+	@WebServlet("/pages/servletDownloadFile")
+	
+5 - Precisamos inserir todas as bibliotecas certinho pra não dar erro, quando o erro for 'goovy' será no
+	iReport
+	
+	nas configurações do projeto em linguage seleciona 'java' em vez de 'groovy'

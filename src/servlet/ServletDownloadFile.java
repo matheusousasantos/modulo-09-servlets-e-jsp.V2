@@ -1,9 +1,9 @@
 package servlet;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,19 +14,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.io.File;
-import java.io.FileInputStream;
-
-import beans.BeanCursoJsp;
+import beans.Aluno;
+import dao.AlunoDAO;
 import dao.UsuarioDAO;
 import service.RelatorioService;
 
-@WebServlet("/servletDownloadFile")
+@WebServlet("/pages/servletDownloadFile")
 public class ServletDownloadFile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private RelatorioService relatorioService = new RelatorioService();
 	private UsuarioDAO dao = new UsuarioDAO();
+	private AlunoDAO daoAlunos = new AlunoDAO();
        
    
     public ServletDownloadFile() {
@@ -43,12 +42,9 @@ public class ServletDownloadFile extends HttpServlet {
 		
 			String tipoExportar = request.getParameter("tipoExportar");
 		
-		
-			List<BeanCursoJsp> usuarios = dao.getUsuarios();
-			List dados = new ArrayList();
-			dados.add(usuarios);
+			List<Aluno> alunos = daoAlunos.getAlunos();
 			
-			String fileUrl = relatorioService.gerarRelatorio(dados, new HashMap(), "rel_usuario", 
+			String fileUrl = relatorioService.gerarRelatorio(alunos, new HashMap(), "rel_usuario", 
 					"rel_usuario", context);
 			
 //			Contruir o caminho completo e absoluto do arquivo.
@@ -84,12 +80,11 @@ public class ServletDownloadFile extends HttpServlet {
 //			Escreve os bytes lidos a partir do fluxo de entrada para o fluxo de saída
 			
 			while((bytesRead = inputStream.read(buffer)) != -1) {
-				
 				outputStream.write(buffer,0,bytesRead); // escrever o fluxo de entrada resposta
-				inputStream.close();
-				outputStream.close();
-				
 			}
+			
+			inputStream.close();
+			outputStream.close();
 			
 			
 		} catch (Exception e) {
