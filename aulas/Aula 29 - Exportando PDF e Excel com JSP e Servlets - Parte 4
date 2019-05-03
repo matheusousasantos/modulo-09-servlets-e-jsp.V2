@@ -1,0 +1,32 @@
+Fazer com que nosso projeto imprima tanto com PDF como EXEL
+
+1 - Fazemos com que o RelatorioService receba o tipo:
+	
+	public String gerarRelatorio(List<?> listaDataBeanColletion, HashMap parametrosRelatorio, 
+			String nomeRelatorioJasper, String nomeRelatorioSaida, 
+			ServletContext servletContext) throws Exception {
+			
+	Ficando assim:
+	
+	public String gerarRelatorio(List<?> listaDataBeanColletion, HashMap parametrosRelatorio, 
+			String nomeRelatorioJasper, String nomeRelatorioSaida, 
+			ServletContext servletContext, String tipoExportar) throws Exception {
+			
+2 - Onde estiver definindo como 'pdf' colocamos um tipo dinâmico
+	
+	caminhoArquivoRelatorio =  SEPARATOR + nomeRelatorioSaida + "." + tipoExportar;
+	
+3 - Vamos precisar de uma condição:
+
+	if(tipoExportar.equalsIgnoreCase("PDF")) {
+			exporter = new JRPdfExporter();
+		}
+    agora se for exel:
+    
+    else if(tipoExportar.equalsIgnoreCase("PDF")) {
+			exporter = new JRXlsExporter();
+		}
+		
+4 - No servlet na hora que chamamos o método precisamos passar o tipo no parâmetro:
+	String fileUrl = relatorioService.gerarRelatorio(alunos, new HashMap(), "rel_usuario", 
+					"rel_usuario", context, 'tipoExportar');

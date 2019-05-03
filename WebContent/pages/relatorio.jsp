@@ -9,8 +9,8 @@
 <body>
 
 	<h1>Relatórios</h1>
-	<a href="servletDownloadFile?id=PDF">PDF</a>
-	<a href="servletDownloadFile?id=EXEL">Exel</a>
+	<a href="servletDownloadFile?tipoExportar=pdf">PDF</a>
+	<a href="servletDownloadFile?tipoExportar=exel">Exel</a>
 
 </body>
 </html>

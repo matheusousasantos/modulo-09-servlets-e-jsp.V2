@@ -45,7 +45,7 @@ public class ServletDownloadFile extends HttpServlet {
 			List<Aluno> alunos = daoAlunos.getAlunos();
 			
 			String fileUrl = relatorioService.gerarRelatorio(alunos, new HashMap(), "rel_usuario", 
-					"rel_usuario", context);
+					"rel_usuario", context, tipoExportar);
 			
 //			Contruir o caminho completo e absoluto do arquivo.
 			File downloadFile = new File(fileUrl);
