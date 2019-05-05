@@ -1,0 +1,79 @@
+1 - Eu tenho um JSON que dentro dele tem um objeto que é um JSON também:
+	
+	var ganttData = [{
+			id: 1, name: "Projeto Java Web", series: [
+				{ name: "Planejado", start: new Date(2019,00,01), end: new Date(2019,00,05) },
+				{ name: "Real", start: new Date(2019,00,01), end: new Date(2019,00,03), color: "#f0f0f0" },
+				{ name: "Projetado", start: new Date(2019,00,01), end: new Date(2019,00,02), color: "#e0e0e0" }
+			]
+		}];
+		
+		series também é um JSON
+	
+2 - Como usando na aula anterior podemos usar o JQuery e o Ajax pra retornar os valores do banco de dados linkando
+	a uma servlet envolvendo todo o grantt view:
+	
+	$(document).ready(function() { // Chamado quando abrir a tela.
+		
+		$.get( "buscarDatasPlanejamento", function(response) {
+			
+			var ganttData = JSON.parse(response);
+			
+			$("#ganttChart").ganttView({ 
+				data: ganttData,
+				slideWidth: 1000,
+				behavior: {
+					onClick: function (data) { 
+						var msg = "Evento de Click: { start: " + data.start.toString("M/d/yyyy") + ", end: " + data.end.toString("M/d/yyyy") + " }";
+						$("#eventMessage").text(msg);
+					},
+					onResize: function (data) { 
+						var msg = "Evento de redimencionar: { start: " + data.start.toString("M/d/yyyy") + ", end: " + data.end.toString("M/d/yyyy") + " }";
+						$("#eventMessage").text(msg);
+					},
+					onDrag: function (data) { 
+						var msg = "Evento de Arrastar: { start: " + data.start.toString("M/d/yyyy") + ", end: " + data.end.toString("M/d/yyyy") + " }";
+						$("#eventMessage").text(msg);
+					}
+				}
+			});
+			
+		    $("#ganttChart").ganttView("setSlideWidth", 600);
+		
+		})
+	
+	)};
+	
+3 - Agora vamos criar a servlet que vai interceptar:
+	
+	BuscarDatasPlanejamento.java - não esqueça de colocar o pages no servlet porque a página que está acessado está dentro do pages
+	
+4 - Vamos fazer o mesmo processo da aula anterior..
+
+5 - Como estamos trabalhando com objetos estáticos ( \"name\":) quanto tentamos colocar uma data ela precisa ser instânciada 
+    gerando assim o erro.
+    
+    Vamos ter que tratar agora no Java Script.
+    
+6 - Vamos ter a resposta do servidor vindo do servlet pelo response e adicionado na variavel:
+    var ganttResposta = JSON.parse(response);
+    
+    e depois tratar essa resposta com JS.
+    
+    
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+    
+	
+	
+	
