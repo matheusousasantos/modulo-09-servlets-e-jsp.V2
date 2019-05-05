@@ -10,6 +10,7 @@
 </head>
 <body>
 	<h3>Recursos Avançados em Java</h3>
+	
 	<table>
 		<tr>
 			<td><a href="pages/capturarExcecoes.jsp">Capturar Exceções</a></td>
@@ -43,6 +44,9 @@
 			<td><a href="pages/relatorio.jsp">Relatórios</a></td>
 		</tr>
 		
+		<tr>
+			<td><a href="pages/data.jsp">Calculando Datas</a></td>
+		</tr>
 		
 	</table>
 	

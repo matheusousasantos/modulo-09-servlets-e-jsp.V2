@@ -60,9 +60,9 @@ public class RelatorioService implements Serializable {
 		JasperPrint impressoraJasper = JasperFillManager.fillReport(relatorioJasper, parametrosRelatorio, jrbcds);
 		
 		
-		if(tipoExportar.equalsIgnoreCase("PDF")) {
+		if(tipoExportar.equalsIgnoreCase("pdf")) {
 			exporter = new JRPdfExporter();
-		} else if(tipoExportar.equalsIgnoreCase("PDF")) {
+		} else if(tipoExportar.equalsIgnoreCase("xls")) {
 			exporter = new JRXlsExporter();
 		}
 		

@@ -10,7 +10,7 @@
 
 	<h1>Relatórios</h1>
 	<a href="servletDownloadFile?tipoExportar=pdf">PDF</a>
-	<a href="servletDownloadFile?tipoExportar=exel">Exel</a>
+	<a href="servletDownloadFile?tipoExportar=xls">Exel</a>
 
 </body>
 </html>

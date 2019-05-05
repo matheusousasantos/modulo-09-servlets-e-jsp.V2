@@ -1,0 +1,75 @@
+1 - Vamos crar mais um link para trabalhar com data:
+
+2 - Vamos usar um plugin do jquery para trabalhar com um calendÃ¡rio: datepicker
+
+3 - No site precisamos importar 4 linhas:
+	
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  	<link rel="stylesheet" href="/resources/demos/style.css">
+  	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+4 - Agora precisamos criar um formulÃ¡rio:
+
+	<form action="calcularDataFinal" method="POST">
+	
+		<label>Data Inicial</label>
+		<input type="text" id="data" name="data"/>
+		
+		<label>Tempo em horas</label>
+		<input type="text" id="tempo" name="tempo"/>
+		
+		<input type="submit" value="Calcular">
+			
+	</form>
+
+5 - Vou precisar de um script pra transformar o campo em um datepicker
+	Vou precisar envocar o JQuery:
+
+	<script type="text/javascript">
+	
+		$(function(){
+			
+			$('#data').datepicker();
+			
+		})
+	
+	</script>
+
+	...O campo 'data' passa a ser um datepicker, porÃ©m precisamos formatar:
+	<script>
+		$('#data').datepicker({dateFormat: 'dd/mm/yyyy'});
+	</script>
+
+6 - Agora vamos criar o DAO:
+	DaoCalculaDataFinal
+	
+	public DaoCalculaDataFinal() {
+		connection = SingleConnection.getConnection(); 
+	}
+	
+	vamos tabalhar somente com um método..
+	
+	public void gravaDataFinal(String date) throws Exception {
+		
+		String sql = "INSERT INTO finalprojetos (datafinal) VALUES (?)";
+		PreparedStatement pmt = connection.prepareStatement(sql);
+		
+		pmt.setString(1, date);
+		pmt.execute();
+		
+	}
+	
+	será salvo no banco de dados.
+	
+7 - Feito o DAO agora precisamos de uma Servlet:
+
+	Como nossa página de requisição está dentro da pasta pages(data.jsp) precisamos informar o caminho
+	correto para a servlet.
+	
+8 - Entendendo a regra de negócio:
+	O usuário tralhará 8 horas por dia ex:
+	80:00 ás 12:00 13:00 ás 17:00 - Sendo 1h de intervalo
+	
+	
+
