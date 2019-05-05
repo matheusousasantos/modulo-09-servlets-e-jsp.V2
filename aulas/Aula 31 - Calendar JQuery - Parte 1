@@ -1,0 +1,121 @@
+Caledário usando JQuery:
+https://fullcalendar.io/ - Teremos uma forma básica de um calendário;
+
+1 - Pra sabermos como é feito o calendario podemos usar a documentação(DOCS) na parte superior da página
+
+	Porém a forma mais fácil e vendo o código fonte da página com o botão direito.
+	
+2 - Os eventos desse calendário é inserido com JSON
+
+3 - No calendário existem vários links que precisam ser apontados para pastas corretas no projeto.
+
+    1° - fullcalendar.min.css - vamos colocar o css desse arquivo no projeto
+    Será as pastas para cada link, tanto css com js
+
+4 - Agora vamos inserir o código da página inspencionada para o nosso projeto.
+
+		Calendário:
+			title: 'Long Event',       - Título
+			start: '2017-02-07',       - começou
+			end: '2017-02-10'          - terminou
+			url: 'http://google.com/', - link
+
+5 - Trazendo os dados do banco pra inserir no calendário:
+
+	1º precisamos executar o ajax get e esperar a resposta
+	2º url que vai ser interceptada -> buscarCalendarioDatas(No caso será a do Servlet)
+	
+	$.get( "buscarCalendarioDatas", function(response) {
+		
+		...
+			
+	 });
+	 
+	 então: Vai ser aberto a página - vai executar o ajax no banco de dados - vai obter a resposta, somente
+	 após obter a resposta - o valor do response vai ser passado pro evento(events)
+	 
+	 <script>
+
+		$(document).ready(function() {
+		
+			$.get( "buscarCalendarioDatas", function(response) {
+		
+				$('#calendar').fullCalendar({
+					header: {
+						left: 'prev,next today',
+						center: 'title',
+						right: 'month,basicWeek,basicDay'
+					},
+					defaultDate: '2017-02-12',
+					navLinks: true, // can click day/week names to navigate views
+					editable: true,
+					eventLimit: true, // allow "more" link when too many events
+					events: [
+						{
+							title: 'All Day Event',
+							start: '2017-02-01'
+						}
+					]
+				});
+			
+			});// Fim do ajax GET
+		
+		});
+
+	</script>
+	
+	Podemos observa todo funcionamento assim:
+	
+	- A tela irá fazer uma requisição de URL(será a url da servlet)
+	
+	calendar.jsp
+	
+		$.get( "buscarCalendarioDatas", function(response) {
+		
+		
+	- A servlet irá escrever na resposta(response) alguma coisa, pode ser do banco ou apenas uma string como visto:	
+	- Assim como uma resposta de status que pode ser um ok(200)
+	- Vamos usar o scape para considerar as aspas duplas
+	BuscarCalendarioDatas.java
+	
+		protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+				throws ServletException, IOException {
+			
+			String datas = "[{ \"title\": \"All Day Event\", \"start\": \"2017-02-01\" }]";
+			response.setStatus(200);
+			response.getWriter().write(datas);
+	
+		}
+		
+	- Será capturado na tela com uso do response e adicionado em uma varável:
+	- Precisamos fazer uma conversão pra JSON
+	
+	calendar.jsp
+	  var datas = JSON.parse(response);
+	  
+	  	$('#calendar').fullCalendar({
+				header: {
+					left: 'prev,next today',
+					center: 'title',
+					right: 'month,basicWeek,basicDay'
+				},
+				defaultDate: '2017-02-12',
+				navLinks: true, // can click day/week names to navigate views
+				editable: true,
+				eventLimit: true, // allow "more" link when too many events
+				events:
+					datas
+		});
+		
+		a resposta, como ja foi montada, só precisa ser usada a variável
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	

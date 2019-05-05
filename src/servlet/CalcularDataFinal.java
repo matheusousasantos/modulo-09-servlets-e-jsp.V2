@@ -43,8 +43,8 @@ public class CalcularDataFinal extends HttpServlet {
 			Date dataCalculada = null;
 			Double totalDeDias = 0.0;
 			
-			String data = request.getParameter("data");
-			int tempo = Integer.parseInt(request.getParameter("tempo"));
+			String data = request.getParameter("data"); //Referente ao dia inicial... ex(04/05/2019).
+			int tempo = Integer.parseInt(request.getParameter("tempo")); //Referente a quantidade de horas trabalhadas ex(16 -> 2d).
 			
 			if(tempo <= horaDia) { //mesmo dia
 				
@@ -58,25 +58,27 @@ public class CalcularDataFinal extends HttpServlet {
 				dataCalculada = calendar.getTime(); //Retorna a data.
 				totalDeDias = 1.0;
 				
-			} else {
+			} else {// Se não for um dia ou menos:
 
 				totalDeDias = (double) (tempo / horaDia);
 				
-				if(totalDeDias <= 1) { // Se der um número querado vai se tornar um dia:
+				if(totalDeDias <= 1) { // Se der um número quebrado vai se tornar um dia:
 					dataCalculada = new SimpleDateFormat("dd/MM/yyyy").parse(data);
-				} else {
-					Date dateInformada = new SimpleDateFormat("dd/MM/yyyy").parse(data);
+				
+				} else { // Se for mais, ex: 16h / 8h que será 2 dias.
+					Date dateInformada = new SimpleDateFormat("dd/MM/yyyy").parse(data);//Pegamos a data informada(Data Inicial).
 					
 //					Vamos pegar uma instancia do calendar:
 					Calendar calendar  = Calendar.getInstance();
 					calendar.setTime(dateInformada);
-					calendar.add(Calendar.DATE, totalDeDias.intValue());// Adiciona mais um dia.
+					calendar.add(Calendar.DATE, totalDeDias.intValue());// pega o calendario e adiciona mais dias.
+//					Com o exemplo acima(Se for mais, ex: 16h / 8h que será 2 dias.) irá passar 2 dias.
 					
 					dataCalculada = calendar.getTime(); //Retorna a data.
 				}
 			}
 //			Salvando no banco de dados.
-			dcdf.gravaDataFinal(new SimpleDateFormat("dd/MM/yyyy").format(dataCalculada));//quando for string
+			dcdf.gravaDataFinal(new SimpleDateFormat("dd/MM/yyyy").format(dataCalculada));//Transforma em string formatada como data.
 			
 			RequestDispatcher view = request.getRequestDispatcher("/pages/data.jsp");
 			request.setAttribute("dataFinal", new SimpleDateFormat("dd/MM/yyyy").format(dataCalculada));
