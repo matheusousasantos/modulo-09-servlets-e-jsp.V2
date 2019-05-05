@@ -1,0 +1,42 @@
+Gantt View
+
+Plugin com jquery usado para gerenciar o tempo e planejamendo de projetos.
+
+1 - Vamos criar uma pasta de script somente pro Script Gantt View:
+	scriptGanttView
+	
+2 - Vamos fazer o mesmo processo da aula anterir copiando os links e inserindo 
+	o caminho correto.
+	
+3 - Podemos perceber que no arquivo data.js contém o JSON estruturado.
+	
+	data.js
+	var ganttData = [
+	{
+		id: 1, name: "Feature 1", series: [
+			{ name: "Planned", start: new Date(2010,00,01), end: new Date(2010,00,03) },
+			{ name: "Actual", start: new Date(2010,00,02), end: new Date(2010,00,05), color: "#f0f0f0" }
+		]
+	}, 
+	{...
+	
+	podemos inserir tanto no codigo quando em um link externo.
+	
+4 - Vamos criar o menu do index pra acessar a página:
+
+5 - Vamos criar os links do css
+	
+	<link rel="stylesheet" type="text/css" href="../scriptGanttView/jquery-ui-1.8.4.css" />
+	<link rel="stylesheet" type="text/css" href="../scriptGanttView/reset.css" />
+	<link rel="stylesheet" type="text/css" href="../scriptGanttView/jquery.ganttView.css" />
+	
+6 - Agora o JS:
+	
+	<script type="text/javascript" src="../scriptGanttView/jquery-1.4.2.js"></script>
+	<script type="text/javascript" src="../scriptGanttView//date.js"></script>
+	<script type="text/javascript" src="../scriptGanttView/jquery-ui-1.8.4.js"></script>
+	<script type="text/javascript" src="../scriptGanttView/jquery.ganttView.js"></script>
+	
+7 - Vamos inserir o corpo da página html, js, jquery e ajax junto com todos os eventos.
+	
+	
