@@ -1,0 +1,129 @@
+Agora vamos partir pra criação do banco de dados:
+
+1 - Vamos criar a tabela de Projeto:
+	
+	CREATE TABLE pojeto
+	(
+	  id bigint NOT NULL,
+	  nome character varying,
+	  CONSTRAINT pojeto_pkey PRIMARY KEY (id)
+	)
+
+2 - agora a tabela serie:
+	
+	CREATE TABLE public.serie
+	(
+	  id bigint NOT NULL,
+	  nome character varying,
+	  datainicial character varying,
+	  datafinal character varying,
+	  projeto bigint,
+	  CONSTRAINT serie_pkey PRIMARY KEY (id),
+	  CONSTRAINT serie_projeto_fkey FOREIGN KEY (projeto) REFERENCES public.pojeto (id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION
+	)
+	
+3 - Agora vamos criar as classes.
+
+	public class Serie {
+	
+	private Long id;
+	private String nome;
+	private String dataInicial;
+	private String dataFinal;
+	
+	colocando o projeto em Projeto irá gerar um efeito de recursividade gerando um loop infinito(estudar ao fundo esse efeito)
+	então podemos definir como:
+	
+	private Long projeto;
+	
+4 - Agora vamos crir ao DAO
+
+	public List<Projeto> getProjetos() throws SQLException {
+		
+		List<Projeto> projetos = new ArrayList<Projeto>();
+		
+//		SQL carregando projetos:
+		String sqlProjeto = "SELECT * FROM projeto";
+		PreparedStatement pmt = connection.prepareStatement(sqlProjeto);
+		ResultSet rs = pmt.executeQuery();
+		
+		while(rs.next()) {
+			
+			Projeto projeto = new Projeto();
+			projeto.setId(rs.getLong("id"));
+			projeto.setNome(rs.getString("nome"));
+			
+			String sqlSerie = "SELECT * FROM serie WHERE projeto = " + rs.getLong("id");
+			PreparedStatement pmtSer = connection.prepareStatement(sqlSerie);
+			ResultSet rsSer = pmtSer.executeQuery();
+			
+			List<Serie> series = new ArrayList<Serie>();
+			
+			while(rsSer.next()) {
+				
+				Serie serie = new Serie();
+				serie.setId(rsSer.getLong("id"));
+				serie.setNome(rsSer.getString("nome"));
+				serie.setDataInicial(rsSer.getString("datainicial"));
+				serie.setDataFinal(rsSer.getString("datafinal"));
+				serie.setProjeto(rsSer.getLong("projeto"));
+				
+				series.add(serie);
+			}
+			
+			projeto.setSeries(series);
+			projetos.add(projeto);
+		}
+	
+		return projetos;
+	}
+	
+5 - Trabalhando na Servlet:
+	
+	doGet:
+	List<Projeto> projetos = dao.getProjetos();
+	
+	precisamos da a resposta em forma de JSON:
+	
+	Vamos adicionar uma biblioteca que trabalha com o JSON:
+	link: https://mvnrepository.com/artifact/org.json/json/20140107
+	
+	gson-2.2.2.jar - lib de JSON do google.
+	
+			List<Projeto> projetos = dao.getProjetos();
+
+			if(!projetos.isEmpty()) {
+				
+			String grantJson = new Gson().toJson(projetos); //Inserindo um objeto e transformando em JSON
+			
+			response.setStatus(200);
+			response.getWriter().write(grantJson);
+				
+			}
+			
+	Quando o código for ex vai trazer os dados do banco corretamente
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
