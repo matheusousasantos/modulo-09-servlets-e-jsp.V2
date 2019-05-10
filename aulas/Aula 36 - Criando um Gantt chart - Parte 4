@@ -1,0 +1,58 @@
+No JQuery temos a facilidade varrer JSON
+
+1 - Precisamos invocar o JQuery e chamar o 	'each'(cada) que será o 'for' e vamos precisar de um indice. :
+	
+	var ganttResposta = JSON.parse(response);
+	
+	1° Vamos passar o nosso JSON que veio da resposta( ganttResposta )
+	2° Vamos passar o indice que será a posição do objeto na lista
+	
+	$.each(ganttResposta, function(index, projeto){
+		
+		alert(projeto.nome); - Vamos manipular como se fosse uma classe Java porém no JS
+	
+	});
+
+2 - Precisamos fazer uma alteração na em uma linha do JQuery:
+
+	jquery.ganttiew.js
+	
+	antes:
+	var start = Date.parse(data[i].series[j].start);
+	var end = Date.parse(data[i].series[j].end)
+	start = Date.parse(start); end = Date.parse(end);
+	
+	depois:
+	var start = new Date(data[i].series[j].start);
+	var end = new Date(data[i].series[j].end)
+	start = new Date(start); end = Date.parse(end);
+	
+	Somente naqueles lugares existem esse erro.
+	
+3 - Mecanismo que separa as datas por ifem :split
+
+	var datainicial = serie.datainicial.split('-');
+	var datafinal = serie.datafinal.split('-')
+
+4 - Inserindo valores nas series:
+
+	ganttData += "{ \"name: \": \""+serie.nome+"\", \"start\" :\""+ 
+	new Date(datainicial[0],datainicial[1],datainicial[2])+"\" , \"color\": \""+cor+"\" }"
+	
+	new Date(datainicial[0],datainicial[1],datainicial[2]) - será inserido dia/mes/ano
+
+5 - Precisamos fazer uma verificação se existem mais series tem que ter uma vigula pra separar elas.
+
+	if(index2 < danttDataResposta.length - 1) { - Se nao for o utimo adiciona uma virgula
+					
+		ganttData += ",";
+					
+	}
+	
+6 - Agora a mesma coisa com os projetos:
+
+	if(index < ganttDataResposta.length - 1) {
+						
+		ganttData +=",";
+						
+	}

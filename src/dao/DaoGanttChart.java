@@ -37,6 +37,7 @@ public class DaoGanttChart {
 			projeto.setNome(rs.getString("nome"));
 			
 			String sqlSerie = "SELECT * FROM serie WHERE projeto = " + rs.getLong("id");
+			
 			PreparedStatement pmtSer = connection.prepareStatement(sqlSerie);
 			ResultSet rsSer = pmtSer.executeQuery();
 			
@@ -52,6 +53,16 @@ public class DaoGanttChart {
 				serie.setProjeto(rsSer.getLong("projeto"));
 				
 				series.add(serie);
+				
+				System.out.println("--------------------------------------");
+				
+				System.out.println("serie:" + serie.getId());
+				System.out.println("nome:" + serie.getNome());
+				System.out.println("datainicial:" + serie.getDataInicial());
+				System.out.println("datafinal:" + serie.getDataFinal());
+				System.out.println("projeto:" + serie.getProjeto());
+				
+				
 			}
 			
 			projeto.setSeries(series);

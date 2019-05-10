@@ -38,17 +38,55 @@
 		
 		$.get( "buscarDatasPlanejamento", function(response) {
 			
-			//var ganttResposta = JSON.parse(response);
+			var ganttDataResposta = JSON.parse(response);
 			
-			var ganttData = [ //Início
-				    {
-					id: 1, name: "Projeto Java Web", series: [
-						{ name: "Planejado", start: new Date(2019,00,01), end: new Date(2019,00,05) },
-						{ name: "Real", start: new Date(2019,00,01), end: new Date(2019,00,03), color: "#f0f0f0" },
-						{ name: "Projetado", start: new Date(2019,00,01), end: new Date(2019,00,02), color: "#e0e0e0" }
-					]
-				  }
-				]; //fim
+			var ganttData = "";
+			ganttData +="[";
+			
+				$.each(ganttDataResposta, function(index, projeto){ //'for' destinado para os projetos
+					
+					ganttData += "{ \"id\": \""+projeto.id+"\", \"name\": \""+projeto.nome+"\", \"series\": [";
+					
+					$.each(projeto.series, function(index2, serie) { //'for' destinado para os series
+					
+						var cores = "blue,green".split(',');
+					
+						var cor;
+					
+						if(index2 === 0){
+							cor = "pink";
+						} else {
+							cor = Number.isInteger(index2 / 2) ? cores[0] : cores[1];
+						}
+					
+						var dataInicial = serie.dataInicial.split('-');
+						var dataFinal = serie.dataFinal.split('-');
+					
+					//Motando os dados da serie:
+						ganttData += "{ \"name\": \""+serie.nome+"\", \"start\":\""+ new Date(dataInicial[0],dataInicial[1],dataInicial[2])+"\", \"end\":\""+ new Date(dataFinal[0],dataFinal[1],dataFinal[2])+"\", \"color\": \""+cor+"\" }"
+					
+						if(index2 < projeto.series.length - 1) {
+							
+						 	ganttData += ",";
+							
+						}
+					
+					});//Fim do For de series;
+					
+					ganttData += "]}"; //Fecha o array json de series
+					
+					if(index < ganttDataResposta.length - 1) {
+						
+						ganttData +=",";
+						
+					}
+			
+				});//Fim For dos projetos
+			
+			ganttData += "]";
+			
+			ganttData = JSON.parse(ganttData);
+
 			
 			$("#ganttChart").ganttView({ 
 				data: ganttData,

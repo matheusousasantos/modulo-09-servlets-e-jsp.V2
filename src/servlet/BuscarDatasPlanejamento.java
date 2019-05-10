@@ -33,7 +33,7 @@ public class BuscarDatasPlanejamento extends HttpServlet {
 			List<Projeto> projetos = dao.getProjetos();
 
 			if(!projetos.isEmpty()) {
-				
+			
 			String grantJson = new Gson().toJson(projetos);
 			
 			response.setStatus(200);
